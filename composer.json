@@ -1,0 +1,30 @@
+{
+    "name": "forumhulp/helper",
+    "type": "phpbb-extension",
+    "description": "Forumhulp helper",
+	"version": "3.1.5",
+    "license": "MIT",
+	"authors": [
+		{
+			"name": "John Peskens",
+			"email": "info@forumhulp.com",
+			"homepage": "http://forumhulp.com",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3",
+		"composer/installers": "~1.0"
+	},
+	"extra": {
+		"display-name": "Forumhulp Helper",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.0"
+		},
+		"version-check": {
+            "host": "forumhulp",
+            "directory": "/ext",
+            "filename": "index.php?id=66"
+		}
+    }
+}

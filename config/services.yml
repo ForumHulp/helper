@@ -1,0 +1,12 @@
+services:
+    forumhulp.helper:
+        class: forumhulp\helper\helper
+        arguments:
+            - @config
+            - @ext.manager
+            - @template
+            - @user
+            - @request
+            - @log
+            - @cache
+            - %core.root_path%
