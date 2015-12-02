@@ -24,7 +24,7 @@
 		"version-check": {
             "host": "forumhulp",
             "directory": "/ext",
-            "filename": "index.php?id=66"
+            "filename": "index.php?id=72"
 		}
     }
 }
