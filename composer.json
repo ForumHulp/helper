@@ -22,7 +22,7 @@
 			"phpbb/phpbb": ">=3.1.0"
 		},
 		"version-check": {
-            "host": "forumhulp",
+            "host": "forumhulp.com",
             "directory": "/ext",
             "filename": "index.php?id=72"
 		}
