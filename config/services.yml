@@ -2,6 +2,7 @@ services:
     forumhulp.helper:
         class: forumhulp\helper\helper
         arguments:
+            - @dbal.conn
             - @config
             - @ext.manager
             - @template
