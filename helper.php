@@ -49,9 +49,9 @@ class helper
 
 	public function detail($ext_name)
 	{
-		$md_manager = (version_compare($this->config['version'], '3.2.*', '<')) ? 
+		$md_manager = (version_compare($this->config['version'], '3.2.0', '<')) ? 
 					new \phpbb\extension\metadata_manager($ext_name, $this->config, $this->phpbb_extension_manager, $this->template, $this->user, $this->root_path) :
-					new \phpbb\extension\metadata_manager($ext_name, $this->config, $this->phpbb_extension_manager, $this->template, $this->root_path);
+					new \phpbb\extension\metadata_manager($ext_name, $this->config, $this->phpbb_extension_manager, $this->root_path);	
 		try
 		{
 			$this->metadata = $md_manager->get_metadata('all');
@@ -62,7 +62,7 @@ class helper
 			trigger_error($message, E_USER_WARNING);
 		}
 
-		$md_manager->output_template_data();
+		$md_manager->output_template_data($this->template);
 
 		if (isset($this->user->lang['ext_details']))
 		{

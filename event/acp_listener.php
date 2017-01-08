@@ -44,7 +44,7 @@ class acp_listener implements EventSubscriberInterface
 	public function run_action($event)
 	{
 		$this->template->assign_vars(array(
-			'DISABLE_ALL'		=> $event['u_action'] . '&action=disable-all',
+			'DISABLE_ALL_FH' => (!$this->extension_manager->is_enabled('sitesplat/BCore')) ? $event['u_action'] . '&action=disable-all' : '',
 		));
 
 		if ($event['action'] == 'disable-all')
