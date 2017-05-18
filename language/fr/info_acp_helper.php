@@ -4,7 +4,7 @@
 * Forumhulp Helper extension for the phpBB Forum Software package.
 * French translation by Galixte (http://www.galixte.com)
 *
-* @copyright (c) 2015 phpBB ForumHulp <http://www.forumhulp.com>
+* @copyright (c) 2017 phpBB ForumHulp <http://www.forumhulp.com>
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
