@@ -1,15 +1,17 @@
 <?php
 /**
 *
-* @package Forumhulp Helper
-* @copyright (c) 2015 ForumHulp.com
-* @license Proprietary
+* Forumhulp Helper extension for the phpBB Forum Software package.
+* French translation by Galixte (http://www.galixte.com)
+*
+* @copyright (c) 2017 ForumHulp <http://www.forumhulp.com>
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 
 /**
- * DO NOT CHANGE
- */
+* DO NOT CHANGE
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -33,19 +35,18 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 //
 // Some characters you may want to copy&paste:
-// ’ » “ ” …
+// ’ « » “ ” …
 //
 
-$lang = array_merge(
-	$lang, array(
-		'UCP_IR'				=> 'Image Resizer',
-		'IMAGE_RESIZE'			=> 'Image Resize',
-		'IMAGE_RESIZE_EXPLAIN'	=> 'Crop your %1$s from the picture and confirm.',
+$lang = array_merge($lang, array(
+		'UCP_IR'				=> 'Redimensionnement d’image',
+		'IMAGE_RESIZE'			=> 'Redimensionner l’image',
+		'IMAGE_RESIZE_EXPLAIN'	=> 'Permet de redimensionner l’image de votre avatar de %1$s, puis de confirmer.',
 		// Your avatar will be saved with a height of %1$s pixels and a width of %2$s pixels.',
 
-		'IMAGE_RESIZE_ERROR'	=> 'No app or file to send!',
-		'IMAGERESIZE_NOTICE'	=> '<div class="phpinfo"><p class="entry">This module is hidden and has no config options. However remind you to set maximum upload in ACP.</p></div>',
-		'ERROR_IMAGERESIZE_DISABLE'	=> 'You can not disable Image Resize because of active extensions<br /><div class="phpinfo">» %s</div>',
-	'FH_HELPER_NOTICE'				=> 'Forumhulp helper application does not exist!<br />Download <a href="https://github.com/ForumHulp/helper" target="_blank">forumhulp/helper</a> and copy the helper folder to your forumhulp extension folder.',
+		'IMAGE_RESIZE_ERROR'	=> 'Aucun fichier envoyé !',
+		'IMAGERESIZE_NOTICE'	=> '<div class="phpinfo"><p class="entry">Ce module est masqué et ne possède aucune option de configuration. Par ailleurs, merci de configurer l’option sur la « Taille maximale d’un avatar » depuis le panneau d’administration.</p></div>',
+		'ERROR_IMAGERESIZE_DISABLE'	=> 'Il n’est pas possible de désactiver le redimensionnement d’image car des extensions sont actives <br /><div class="phpinfo">» %s</div>',
+	'FH_HELPER_NOTICE'				=> 'L’extension « Forumhulp helper » n’est pas installée !<br />Merci de télécharger l’extension : « <a href="https://github.com/ForumHulp/helper" target="_blank">forumhulp/helper</a> », puis de l’installer.',
 	)
 );
