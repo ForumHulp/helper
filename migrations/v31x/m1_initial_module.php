@@ -51,20 +51,18 @@ class m1_initial_module extends container_aware_migration
 		{
 			return array(
 				array('module.remove', array(
-					'ucp', 'UCP_PROFILE', array(
-						'module_basename'	=> '\forumhulp\helper\ucp\ir_module',
-						'modes'				=> array('ir'),
-					),
+					'ucp',
+					false,
+					'UCP_IR',
 				)),
 			);	
 		} else
 		{
 			return array(
 				array('module.remove', array(
-					'ucp', 'UCP_PROFILE', array(
-						'module_basename'	=> '\forumhulp\helper\ucp\ir_module',
-						'modes'				=> array('ir'),
-					),
+					'ucp',
+					false,
+					'UCP_IR',
 				)),
 				array('module.add', array(
 					'ucp', 'UCP_PROFILE', array(
