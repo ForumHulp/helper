@@ -1,0 +1,26 @@
+<!-- INCLUDECSS {ROOT_PATH}ext/forumhulp/helper/css/slim.min.css -->
+<!-- INCLUDE ucp_header.html -->
+
+<h2>{L_IMAGE_RESIZE}</h2>
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+	<!-- IF ERROR -->
+        <p class="error">{ERROR}</p>
+    <!-- ELSE -->
+        <p>{L_IMAGE_RESIZE_EXPLAIN}</p>
+        <fieldset>
+            <div class="slim" data-service="{U_ACTION}" data-meta-filename="{IMAGENAME}" data-did-upload="imageUpload" data-min-size="{MIN_SIZE}" data-ratio="1:1">
+                <img src="{UPLOADED_IMAGE}" alt="" />
+            </div>
+        </fieldset>
+    <!-- ENDIF -->
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+<script>
+function imageUpload(error, data, response) 
+{
+	window.location.replace(response.redirect);
+}
+</script>
+<!-- INCLUDEJS js/slim.kickstart.min.js -->
+<!-- INCLUDE ucp_footer.html -->
