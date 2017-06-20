@@ -207,6 +207,7 @@ class helper
 					}
 				}
 			}
+			phpbb_chmod($this->root_path . $file, CHMOD_READ);
 		}
 
 		if (sizeof($files) == sizeof($files_changed))
