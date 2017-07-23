@@ -39,6 +39,8 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
+	'FH_DISABLE_ALL'		=> 'Désactiver toutes les extensions', 
+
 	'LOG_CORE_INSTALLED'	=> '<strong>Aide Forumhulp</strong><br />» Fichiers modifiés avec succès',
 	'LOG_CORE_DEINSTALLED'	=> '<strong>Aide Forumhulp</strong><br />» Fichiers restaurés avec succès',
 	'LOG_CORE_NOT_REPLACED'	=> '<strong>Aide Forumhulp</strong><br />» Fichier(s) n’ayant pu être remplacé(s)<br />» %s',
