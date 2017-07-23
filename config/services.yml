@@ -2,20 +2,20 @@ services:
     forumhulp.helper.listener:
         class: forumhulp\helper\event\acp_listener
         arguments:
-            - @ext.manager
-            - @controller.helper
-            - @template
+            - '@ext.manager'
+            - '@controller.helper'
+            - '@template'
         tags:
             - { name: event.listener }
     forumhulp.helper:
         class: forumhulp\helper\helper
         arguments:
-            - @dbal.conn
-            - @config
-            - @ext.manager
-            - @template
-            - @user
-            - @request
-            - @log
-            - @cache
-            - %core.root_path%
+            - '@dbal.conn'
+            - '@config'
+            - '@ext.manager'
+            - '@template'
+            - '@user'
+            - '@request'
+            - '@log'
+            - '@cache'
+            - '%core.root_path%'
