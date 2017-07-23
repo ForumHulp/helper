@@ -9,7 +9,14 @@
 
 namespace forumhulp\helper;
 
-use \phpbb\filesystem\filesystem;
+use phpbb\db\driver\driver_interface;
+use phpbb\config\config;
+use phpbb\extension\manager;
+use phpbb\template\template;
+use phpbb\user;
+use phpbb\request\request;
+use phpbb\log\log;
+use phpbb\cache\service;
 
 class helper 
 {
@@ -23,35 +30,29 @@ class helper
 	protected $cache;
 	protected $root_path;
 
-	public function __construct(
-		\phpbb\db\driver\driver_interface $db,
-		\phpbb\config\config $config,
-		\phpbb\extension\manager $phpbb_extension_manager,
-		\phpbb\template\template $template,
-		\phpbb\user $user,
-		\phpbb\request\request $request,
-		\phpbb\log\log $log,
-		\phpbb\cache\service $cache,
+	public function __construct(driver_interface $db, config $config, manager $phpbb_extension_manager, template $template, user $user, request $request, log $log, service $cache, 
 		$root_path)
 	{
-		$this->db = $db;
-		$this->config = $config;
-		$this->phpbb_extension_manager = $phpbb_extension_manager;
-		$this->template = $template;
-		$this->user = $user;
-		$this->request = $request;
-		$this->log = $log;
-		$this->cache = $cache;
-		$this->root_path = $root_path;
+		$this->db			= $db;
+		$this->config		= $config;
+		$this->ext_manager	= $phpbb_extension_manager;
+		$this->template		= $template;
+		$this->user			= $user;
+		$this->request		= $request;
+		$this->log			= $log;
+		$this->cache		= $cache;
+		$this->root_path	= $root_path;
 
 		$this->user->add_lang(array('install', 'acp/extensions', 'migrator'));
 	}
 
 	public function detail($ext_name)
 	{
-		$md_manager = (version_compare($this->config['version'], '3.2.0', '<')) ? 
-					new \phpbb\extension\metadata_manager($ext_name, $this->config, $this->phpbb_extension_manager, $this->template, $this->user, $this->root_path) :
-					new \phpbb\extension\metadata_manager($ext_name, $this->config, $this->phpbb_extension_manager, $this->root_path);	
+		$md_manager = ((version_compare($this->config['version'], '3.2.0', '<')) ? 
+						new \phpbb\extension\metadata_manager($ext_name, $this->config, $this->ext_manager, $this->template, $this->user, $this->root_path) :
+						((version_compare($this->config['version'], '3.2.1*', '<')) ? 
+						new \phpbb\extension\metadata_manager($ext_name, $this->config, $this->ext_manager, $this->root_path) :
+						new \phpbb\extension\metadata_manager($ext_name, $this->root_path . $this->ext_manager->get_extension_path($ext_name))));
 		try
 		{
 			$this->metadata = $md_manager->get_metadata('all');
@@ -62,7 +63,7 @@ class helper
 			trigger_error($message, E_USER_WARNING);
 		}
 
-		$md_manager->output_template_data($this->template);
+		(version_compare($this->config['version'], '3.2.1*', '<')) ? $md_manager->output_template_data($this->template) : $this->output_metadata_to_template($this->metadata);
 
 		if (isset($this->user->lang['ext_details']))
 		{
@@ -70,9 +71,7 @@ class helper
 			{
 				foreach($value as $desc)
 				{
-					$this->template->assign_block_vars($key, array(
-						'DESCRIPTION'	=> $desc,
-					));
+					$this->template->assign_block_vars($key, array('DESCRIPTION' => $desc));
 				}
 			}
 		}
@@ -110,16 +109,43 @@ class helper
 				));
 			}
 		}
+		
+		$this->template->assign_vars(array('IS_AJAX' => $this->request->is_ajax()));
+	}
 
-		if ($this->request->is_ajax())
+	/**
+	* Outputs extension metadata into the template
+	*
+	* @param array $metadata Array with all metadata for the extension
+	* @return null
+	*/
+	public function output_metadata_to_template($metadata)
+	{
+		$this->template->assign_vars(array(
+			'META_NAME'			=> $metadata['name'],
+			'META_TYPE'			=> $metadata['type'],
+			'META_DESCRIPTION'	=> (isset($metadata['description'])) ? $metadata['description'] : '',
+			'META_HOMEPAGE'		=> (isset($metadata['homepage'])) ? $metadata['homepage'] : '',
+			'META_VERSION'		=> $metadata['version'],
+			'META_TIME'			=> (isset($metadata['time'])) ? $metadata['time'] : '',
+			'META_LICENSE'		=> $metadata['license'],
+
+			'META_REQUIRE_PHP'		=> (isset($metadata['require']['php'])) ? $metadata['require']['php'] : '',
+			'META_REQUIRE_PHP_FAIL'	=> (isset($metadata['require']['php'])) ? false : true,
+
+			'META_REQUIRE_PHPBB'		=> (isset($metadata['extra']['soft-require']['phpbb/phpbb'])) ? $metadata['extra']['soft-require']['phpbb/phpbb'] : '',
+			'META_REQUIRE_PHPBB_FAIL'	=> (isset($metadata['extra']['soft-require']['phpbb/phpbb'])) ? false : true,
+
+			'META_DISPLAY_NAME'	=> (isset($metadata['extra']['display-name'])) ? $metadata['extra']['display-name'] : '',
+		));
+
+		foreach ($metadata['authors'] as $author)
 		{
-			$this->template->assign_vars(array(
-				'IS_AJAX'	=> true,
-			));
-		} else
-		{
-			$this->template->assign_vars(array(
-			//	'U_BACK'	=> $this->u_action,
+			$this->template->assign_block_vars('meta_authors', array(
+				'AUTHOR_NAME'		=> $author['name'],
+				'AUTHOR_EMAIL'		=> (isset($author['email'])) ? $author['email'] : '',
+				'AUTHOR_HOMEPAGE'	=> (isset($author['homepage'])) ? $author['homepage'] : '',
+				'AUTHOR_ROLE'		=> (isset($author['role'])) ? $author['role'] : '',
 			));
 		}
 	}
@@ -207,6 +233,7 @@ class helper
 					}
 				}
 			}
+			phpbb_chmod($this->root_path . $file, CHMOD_READ);
 		}
 
 		if (sizeof($files) == sizeof($files_changed))

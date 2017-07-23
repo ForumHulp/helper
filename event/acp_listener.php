@@ -10,10 +10,10 @@
 
 namespace forumhulp\helper\event;
 
-/**
-* @ignore
-*/
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use phpbb\extension\manager;
+use phpbb\controller\helper;
+use phpbb\template\template;
 
 /**
 * Event listener
@@ -27,7 +27,7 @@ class acp_listener implements EventSubscriberInterface
 	/**
 	* Constructor
  	*/
-	public function __construct(\phpbb\extension\manager $phpbb_extension_manager, \phpbb\controller\helper $helper, \phpbb\template\template $template)
+	public function __construct(manager $phpbb_extension_manager, helper $helper, template $template)
 	{
 		$this->extension_manager = $phpbb_extension_manager;
 		$this->helper = $helper;
@@ -37,14 +37,15 @@ class acp_listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.acp_extensions_run_action'	=> 'run_action'
+			'core.acp_extensions_run_action'		=> 'run_action',
+			'core.acp_extensions_run_action_before'	=> 'run_action'
 		);
 	}
 
 	public function run_action($event)
 	{
 		$this->template->assign_vars(array(
-			'DISABLE_ALL_FH' => (!$this->extension_manager->is_enabled('sitesplat/BCore')) ? $event['u_action'] . '&action=disable-all' : '',
+			'DISABLE_ALL_FH' => (!$this->extension_manager->is_enabled('sitesplat/BBCore')) ? $event['u_action'] . '&action=disable-all' : '',
 		));
 
 		if ($event['action'] == 'disable-all')

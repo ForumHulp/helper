@@ -38,14 +38,14 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge(
 	$lang, array(
-		'UCP_IR'				=> 'Image Resizer',
-		'IMAGE_RESIZE'			=> 'Image Resize',
-		'IMAGE_RESIZE_EXPLAIN'	=> 'Crop your %1$s from the picture and confirm.',
+		'UCP_IR'				=> 'Redimensionar imagen',
+		'IMAGE_RESIZE'			=> 'Redimensionar imagen',
+		'IMAGE_RESIZE_EXPLAIN'	=> 'Recorte su %1$s de la imagen y confirme.',
 		// Your avatar will be saved with a height of %1$s pixels and a width of %2$s pixels.',
 
-		'IMAGE_RESIZE_ERROR'	=> 'No app or file to send!',
-		'IMAGERESIZE_NOTICE'	=> '<div class="phpinfo"><p class="entry">This module is hidden and has no config options. However remind you to set maximum upload in ACP.</p></div>',
-		'ERROR_IMAGERESIZE_DISABLE'	=> 'You can not disable Image Resize because of active extensions<br /><div class="phpinfo">» %s</div>',
-	'FH_HELPER_NOTICE'				=> 'Forumhulp helper application does not exist!<br />Download <a href="https://github.com/ForumHulp/helper" target="_blank">forumhulp/helper</a> and copy the helper folder to your forumhulp extension folder.',
+		'IMAGE_RESIZE_ERROR'	=> '¡Ninguna aplicación o archivo para enviar!',
+		'IMAGERESIZE_NOTICE'	=> '<div class="phpinfo"><p class="entry">Este módulo está oculto y no tiene opciones de configuración. Sin embargo, le recuerdo que debe configurar la carga máxima en el PCA.</p></div>',
+		'ERROR_IMAGERESIZE_DISABLE'	=> 'No puede inhabilitar la redimensión de imagen debido a las extensiones activas<br /><div class="phpinfo">» %s</div>',
+	'FH_HELPER_NOTICE'				=> '¡La aplicación Forumhulp Helper no existe!<br />Descargue <a href="https://github.com/ForumHulp/helper" target="_blank">forumhulp/helper</a> y copie la carpeta helper en la carpeta de la extensión forumhulp.',
 	)
 );
