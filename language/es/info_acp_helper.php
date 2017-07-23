@@ -18,7 +18,7 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, array(
-	'FH_DISABLE_ALL'		=> 'Disable all extensions', 
+	'FH_DISABLE_ALL'		=> 'Deshabilitar todas las extensiones', 
 
 	'LOG_CORE_INSTALLED'	=> '<strong>Forumhulp Helper</strong><br />» Archivos cambiados correctamente',
 	'LOG_CORE_DEINSTALLED'	=> '<strong>Forumhulp Helper</strong><br />» Archivos restaurados correctamente',
