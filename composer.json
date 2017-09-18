@@ -2,7 +2,7 @@
     "name": "forumhulp/helper",
     "type": "phpbb-extension",
     "description": "Forumhulp helper",
-	"version": "3.1.14",
+	"version": "3.1.15",
     "license": "MIT",
 	"authors": [
 		{

@@ -52,7 +52,7 @@ class helper
 						new \phpbb\extension\metadata_manager($ext_name, $this->config, $this->ext_manager, $this->template, $this->user, $this->root_path) :
 						((version_compare($this->config['version'], '3.2.1*', '<')) ? 
 						new \phpbb\extension\metadata_manager($ext_name, $this->config, $this->ext_manager, $this->root_path) :
-						new \phpbb\extension\metadata_manager($ext_name, $this->root_path . $this->ext_manager->get_extension_path($ext_name))));
+						$this->ext_manager->create_extension_metadata_manager($ext_name)));
 		try
 		{
 			$this->metadata = $md_manager->get_metadata('all');
